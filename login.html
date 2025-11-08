@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Mohan's Cybersecurity Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16a085);
+      font-family: "Poppins", sans-serif;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    .particles {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      overflow: hidden; z-index: -1;
+    }
+    .particle {
+      position: absolute; width: 2px; height: 2px;
+      background: rgba(0, 229, 255, 0.5); border-radius: 50%;
+      animation: float 15s infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+    }
+
+    .profile-section {
+      text-align: center; margin: 40px 0 30px;
+      animation: fadeInDown 1s ease;
+    }
+    .profile-img-wrapper {
+      width: 180px; height: 180px; margin: 0 auto 25px;
+      border-radius: 50%; padding: 5px;
+      background: linear-gradient(135deg, #00bcd4, #00e5ff);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+      animation: glow 2s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 30px rgba(0, 229, 255, 0.5); }
+      50% { box-shadow: 0 0 50px rgba(0, 229, 255, 0.8); }
+    }
+    .profile-img {
+      width: 100%; height: 100%; border-radius: 50%;
+      object-fit: cover; border: 4px solid #0a0a0a;
+    }
+    .profile-section h1 {
+      font-size: 2.5rem; color: #00e5ff;
+      text-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+      margin-bottom: 10px;
+    }
+    .profile-section .title {
+      font-size: 1.2rem; color: #b0bec5; margin-bottom: 15px;
+    }
+    .profile-section .tagline {
+      font-size: 0.95rem; color: #90a4ae;
+      max-width: 500px; margin: 0 auto 20px;
+    }
+    .social-links {
+      display: flex; gap: 20px;
+      justify-content: center; margin-top: 20px;
+    }
+    .social-links a {
+      color: #00e5ff; font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover {
+      color: #00bcd4; transform: translateY(-3px);
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px; padding: 40px;
+      width: 90%; max-width: 420px; text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1s ease; margin-bottom: 40px;
+    }
+    .login-container h2 {
+      color: #00e5ff; margin-bottom: 25px; font-size: 1.8rem;
+    }
+    .form-group {
+      position: relative; margin-bottom: 20px;
+    }
+    .form-group i {
+      position: absolute; left: 15px; top: 50%;
+      transform: translateY(-50%); color: #00bcd4; font-size: 1.1rem;
+    }
+    input {
+      width: 100%; padding: 14px 14px 14px 45px;
+      border-radius: 12px; border: 1px solid rgba(0, 188, 212, 0.3);
+      font-size: 1rem; outline: none;
+      background: rgba(255, 255, 255, 0.9); color: #000;
+      transition: all 0.3s ease;
+    }
+    input:focus {
+      border-color: #00bcd4;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+      background: #fff;
+    }
+    .btn {
+      width: 100%; padding: 14px; border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #00bcd4, #00e5ff);
+      color: #000; font-weight: 700; cursor: pointer;
+      font-size: 1.1rem; transition: all 0.3s ease;
+      margin-top: 10px; text-transform: uppercase;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(0, 255, 255, 0.5);
+    }
+    .links {
+      margin-top: 20px; font-size: 0.9rem;
+    }
+    .links a {
+      color: #00e5ff; text-decoration: none; cursor: pointer;
+    }
+    .links a:hover {
+      color: #4dd0e1; text-decoration: underline;
+    }
+
+    .toast {
+      position: fixed; bottom: 30px; right: -400px;
+      min-width: 280px; background: #1a1a1a; color: white;
+      padding: 15px 25px; border-radius: 8px; font-size: 0.95rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      display: flex; align-items: center; gap: 10px;
+      transition: all 0.5s ease; opacity: 0; z-index: 1000;
+    }
+    .toast.show { right: 30px; opacity: 1; }
+    .toast.success { background: #00c853; }
+    .toast.error { background: #d32f2f; }
+    .toast i { font-size: 1.2rem; }
+
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+
+  <div class="profile-section">
+    <div class="profile-img-wrapper">
+      <img src="https://ui-avatars.com/api/?name=Mohan+Kumar+Jena&size=180&background=00bcd4&color=fff" 
+           alt="Mohan Kumar Jena" class="profile-img">
+    </div>
+    <h1>Mohan Kumar Jena</h1>
+    <p class="title">Cybersecurity Professional</p>
+    <p class="tagline">Securing networks, defending systems, and empowering digital safety.</p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/mohan-kumar-jena-748912264/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/mohanjena" target="_blank"><i class="fab fa-github"></i></a>
+   <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mohanjena2004@gmail.com" target="_blank" rel="noopener noreferrer">
+  <i class="fas fa-envelope"></i>
+</a>
+    </div>
+  </div>
+
+  <div class="login-container">
+    <h2><i class="fas fa-shield-halved"></i> Secure Access</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="email" placeholder="Email Address or Phone" required>
+      </div>
+      <div class="form-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="password" placeholder="Password" required>
+      </div>
+      <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+    </form>
+    <div class="links">
+      <p>Don't have an account? <a id="registerLink">Create one here</a></p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"><i class="fas"></i><span id="toast-msg"></span></div>
+
+  <script>
+    // Floating particles
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 50; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 15 + 's';
+      particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+      particlesContainer.appendChild(particle);
+    }
+
+    // Toast notification function
+    function showToast(type, message) {
+      const toast = document.getElementById('toast');
+      const icon = toast.querySelector('i');
+      const text = document.getElementById('toast-msg');
+      text.textContent = message;
+      toast.className = 'toast ' + type + ' show';
+      icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-triangle';
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // Login form handler
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const emailOrPhone = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!emailOrPhone || !password) {
+        showToast('error', 'Please enter both email/phone and password!');
+        return;
+      }
+
+      const hashedPassword = CryptoJS.SHA256(password).toString();
+
+      try {
+        // ✅ Send login request to backend (Flask)
+        const response = await fetch('http://127.0.0.1:5000/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ emailOrPhone, password: hashedPassword })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showToast('success', data.message);
+          sessionStorage.setItem('loggedIn', 'true');
+          sessionStorage.setItem('currentUser', JSON.stringify(data.user));
+          setTimeout(() => window.location.href = 'index.html', 1000);
+        } else {
+          showToast('error', data.message || 'Invalid credentials!');
+        }
+      } catch (err) {
+        console.error('⚠️ Fetch failed:', err);
+        showToast('error', 'Could not connect to server. Please ensure Flask is running.');
+      }
+    });
+
+    // Register link handler
+    document.getElementById('registerLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = 'register.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mohan Kumar Jena - Cybersecurity Portfolio</title>
+
+  <!-- Font Awesome & CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+
+  <style>
+    /* 🔹 Certificate Section Styling */
+    .certificates-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .certificate-box {
+      width: 100%;
+      max-width: 650px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0,255,255,0.15);
+      transition: 0.4s ease;
+    }
+
+    .certificate-box:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 40px rgba(0,255,255,0.35);
+      border-color: rgba(0,255,255,0.4);
+    }
+
+    .certificate-box h3 {
+      color: #00e5ff;
+      margin-bottom: 15px;
+    }
+
+    .certificate-box p {
+      color: #b9e8ff;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+    }
+
+    .certificate-box img {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(0,229,255,0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .certificate-box img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(0,229,255,0.6);
+    }
+
+    .certificate-box a {
+      display: inline-block;
+      background: linear-gradient(135deg, #00bcd4, #00e5ff);
+      color: #000;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(0,255,255,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .certificate-box a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(0,255,255,0.6);
+    }
+
+    /* 🌐 Footer Contact Styling */
+    footer {
+      background: rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(0, 229, 255, 0.2);
+      padding: 25px 0;
+      text-align: center;
+      margin-top: 60px;
+      box-shadow: 0 -5px 30px rgba(0,255,255,0.1);
+    }
+
+    footer h3 {
+      color: #00e5ff;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #00e5ff;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+      text-shadow: 0 0 15px #00e5ff;
+      transform: translateY(-3px);
+    }
+
+    footer p {
+      margin-top: 15px;
+      color: #90a4ae;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+      <a href="#home" class="nav-link active" onclick="showSection(event, 'home')">
+        <i class="fas fa-home"></i> Home
+      </a>
+      <a href="#about" class="nav-link" onclick="showSection(event, 'about')">
+        <i class="fas fa-user"></i> About
+      </a>
+      <a href="#projects" class="nav-link" onclick="showSection(event, 'projects')">
+        <i class="fas fa-project-diagram"></i> Projects
+      </a>
+      <a href="#certificates" class="nav-link" onclick="showSection(event, 'certificates')">
+        <i class="fas fa-certificate"></i> Certificates
+      </a>
+      <a href="#" class="nav-link logout-btn" onclick="logout(event)">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    </nav>
+
+    <!-- HOME SECTION -->
+    <div id="home" class="hero active">
+      <div class="hero-content">
+        <img 
+          src="WhatsApp Image 2025-06-18 at 07.33.26_0d4387d3.jpg" 
+          alt="Mohan Kumar Jena" 
+          class="profile-img"
+        />
+
+        <h1 class="hero-name">Mohan Kumar Jena</h1>
+
+        <blockquote style="font-style: italic; color: #aeeff5; font-size: 1rem; max-width: 600px; margin: 0 auto;">
+          “Cybersecurity is not just about protecting systems — it's about protecting people, trust, and the digital world we live in.”
+        </blockquote>
+      </div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+      <h2><i class="fas fa-user-shield"></i> About Me</h2>
+      <div class="about-content">
+        <div class="info-card">
+          <h3><i class="fas fa-user"></i> Who I Am</h3>
+          <p>I'm a passionate cybersecurity professional with hands-on experience in vulnerability analysis and digital forensics. I focus on designing and implementing secure architectures, identifying system vulnerabilities, and developing effective strategies to prevent and mitigate cyber threats.</p>
+        </div>
+
+        <div class="skill-card">
+          <h3><i class="fas fa-shield-alt"></i> Core Cybersecurity Skills</h3>
+          <p>Vulnerability Assessment, Network Security, Cryptography (AES, DES), Web Application Security, Phishing Simulation.</p>
+        </div>
+
+        <div class="skill-card">
+          <h3><i class="fas fa-laptop-code"></i> Technical Tools & Technologies</h3>
+          <p>Kali Linux, Nmap, Burp Suite, Metasploit, Wireshark, Python (Security Scripting), and OpenSSL.</p>
+        </div>
+
+        <div class="info-card">
+          <h3><i class="fas fa-lightbulb"></i> Interests</h3>
+          <p>I'm passionate about exploring advanced areas of cybersecurity such as malware analysis, network defense. I enjoy developing practical security tools that enhance online safety and promote cybersecurity awareness among users.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+      <h2><i class="fas fa-folder-open"></i> My Projects</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3><i class="fas fa-shield-alt"></i> Cybersecurity Toolkit</h3>
+          <p>An interactive toolkit featuring steganography, cryptography, and encryption tools — designed to help users test and secure their networks effectively.</p>
+
+          <a href="index2.html" class="btn btn-secondary">
+            <i class="fas fa-tools"></i> Open Toolkit
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES SECTION -->
+    <section id="certificates" style="padding: 60px 20px;">
+      <h2><i class="fas fa-award"></i> Certificates</h2>
+
+      <div class="certificates-container">
+
+        <!-- 🖼️ Image Certificate -->
+        <div class="certificate-box">
+          <h3><i class="fas fa-image"></i> Hackmanthan Certificate</h3>
+          <img 
+            src="WhatsApp Image 2025-10-09 at 09.26.46_0c11b770.jpg" 
+            alt="Hackmanthan Certificate"
+            onclick="window.open(this.src, '_blank');"
+            onerror="this.src='https://via.placeholder.com/600x400/00bcd4/ffffff?text=Certificate+Image'">
+          <p>Click the image to view full certificate</p>
+        </div>
+
+        <!-- 📄 PDF Certificate -->
+        <div class="certificate-box">
+          <h3><i class="fas fa-file-pdf"></i> Bootcamp Certificate</h3>
+          <p>Click below to open your certificate</p>
+          <a href="bootcamp_certificate_mohan.pdf.pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> View PDF
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- 🌐 FOOTER CONTACT SECTION -->
+  <footer>
+    <h3>Contact Me</h3>
+    <div class="footer-links">
+   <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mohanjena2004@gmail.com" target="_blank" rel="noopener noreferrer">
+  <i class="fas fa-envelope"></i>
+</a>
+      <a href="https://www.linkedin.com/in/mohan-kumar-jena-748912264/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/mohanjena" target="_blank"><i class="fab fa-github"></i></a>
+    </div>
+    <p> Developed by <strong>Mohan Kumar Jena</strong></p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    if (sessionStorage.getItem('loggedIn') !== 'true') {
+      window.location.href = 'login.html';
+    }
+
+    function logout(event) {
+      if (event) event.preventDefault();
+      if (confirm('Are you sure you want to logout?')) {
+        window.location.href = 'logout.html';
+      }
+    }
+
+    function showSection(event, sectionId) {
+      if (event) event.preventDefault();
+
+      document.querySelectorAll('section, .hero').forEach(sec => {
+        sec.classList.remove('active');
+        sec.style.display = 'none';
+      });
+
+      const target = document.getElementById(sectionId);
+      if (target) {
+        target.style.display = 'block';
+        setTimeout(() => target.classList.add('active'), 10);
+      }
+
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+      const activeLink = document.querySelector(`[onclick*="${sectionId}"]`);
+      if (activeLink) activeLink.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (sectionId === 'home') {
+        const hero = document.querySelector('.hero');
+        hero.style.display = 'flex';
+        hero.style.justifyContent = 'center';
+        hero.style.alignItems = 'center';
+      }
+    }
+
+    const taglines = [
+      "Cybersecurity Professional",
+      "Ethical Hacker",
+      "Security Researcher",
+      "Digital Forensics Expert"
+    ];
+    let tIndex = 0, cIndex = 0, del = false;
+    function type() {
+      const el = document.querySelector('.tagline');
+      const txt = taglines[tIndex];
+      el.textContent = del ? txt.substring(0, cIndex--) : txt.substring(0, cIndex++);
+      let spd = del ? 50 : 100;
+      if (!del && cIndex === txt.length) { spd = 2000; del = true; }
+      else if (del && cIndex === 0) { del = false; tIndex = (tIndex + 1) % taglines.length; spd = 500; }
+      setTimeout(type, spd);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('section').forEach(s => { if (s.id !== 'home') s.style.display = 'none'; });
+      const hero = document.querySelector('.hero');
+      hero.style.justifyContent = 'center';
+      hero.style.alignItems = 'center';
+      setTimeout(type, 500);
+    });
+  </script>
+</body>
+</html>

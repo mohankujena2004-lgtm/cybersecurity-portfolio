@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cybersecurity Toolkit | Mohan Kumar Jena</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+/* 🌌 Background Image */
+body {
+  font-family: "Poppins", sans-serif;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
+    url("images/cyber_wallpaper.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #e0f7fa;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: hidden;
+}
+
+
+    /* 🔙 Back Button */
+    .back-btn {
+      position: fixed;
+      top: 25px;
+      left: 25px;
+      text-decoration: none;
+      color: #00e5ff;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      font-weight: 600;
+      transition: 0.3s;
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(135deg, #00bcd4, #00e5ff);
+      color: #000;
+      box-shadow: 0 0 25px rgba(0,255,255,0.6);
+    }
+
+    /* 🧭 Header */
+    header {
+      text-align: center;
+      margin-top: 100px;
+      color: #00e5ff;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      text-shadow: 0 0 25px rgba(0, 229, 255, 0.6);
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: #b9e8ff;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    /* 🧰 Container */
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+      padding: 40px;
+      margin-bottom: 50px;
+      backdrop-filter: blur(20px);
+    }
+
+    /* 🧱 Tool Box */
+    .tool-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 30px 0;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+      transition: 0.3s;
+    }
+
+    .tool-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+    }
+
+    h2 {
+      color: #00e5ff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      color: #00bcd4;
+      margin-bottom: 10px;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    input, select, textarea {
+      background: rgba(255, 255, 255, 0.9);
+      color: #000;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+    }
+
+    button {
+      background: linear-gradient(135deg, #00bcd4, #00e5ff);
+      color: #000;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+    }
+
+    .output {
+      background: rgba(251, 248, 248, 0.918);
+      color: #00ffae;
+      border-left: 4px solid #00e5ff;
+      padding: 10px;
+      border-radius: 8px;
+      min-height: 50px;
+      font-family: "Courier New", monospace;
+    }
+
+    footer {
+      text-align: center;
+      color: #90a4ae;
+      margin: 30px 0 15px;
+      font-size: 0.9rem;
+    }
+
+    /* 📱 Responsive */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.2rem; }
+      header p { font-size: 1rem; }
+      .container { padding: 25px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 🔙 Back Button -->
+  <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+  <!-- 🧭 Header -->
+  <header>
+    <h1>Cybersecurity Toolkit</h1>
+    <p>Explore tools for Steganography, Cryptography, AES, DES & Phishing Detection</p>
+  </header>
+
+  <!-- 🧰 Main Tool Container -->
+  <div class="container">
+
+    <!-- Steganography -->
+    <div class="tool-box">
+      <h2>Steganography</h2>
+      <h3>Hide Text in Image</h3>
+      <input type="file" id="fileInput" accept="image/*">
+      <input type="text" id="textToHide" placeholder="Enter text to hide">
+      <button id="hideTextBtn">Hide Text</button>
+      <button id="downloadBtn" style="display:none;">Download Image</button>
+
+      <h3>Extract Hidden Text</h3>
+      <input type="file" id="extractFileInput" accept="image/*">
+      <button id="extractTextBtn">Extract Text</button>
+      <textarea id="extractedText" placeholder="Extracted text will appear here" readonly></textarea>
+      <canvas id="canvas" style="display:none;"></canvas>
+    </div>
+
+    <!-- Caesar Cipher -->
+    <div class="tool-box">
+      <h2>Caesar Cipher</h2>
+      <input type="text" id="caesarText" placeholder="Enter text" required>
+      <input type="number" id="shiftValue" placeholder="Shift value" required>
+      <button id="encryptBtn">Encrypt</button>
+      <button id="decryptBtn" style="display:none;">Decrypt</button>
+      <p id="caesarResult"></p>
+      <p id="decryptedResult"></p>
+    </div>
+
+    <!-- AES -->
+    <div class="tool-box">
+      <h2>AES Encryption / Decryption</h2>
+      <h3>Encrypt</h3>
+      <textarea id="aesPlaintext" placeholder="Enter text to encrypt"></textarea>
+      <input type="text" id="aesKey" placeholder="Enter AES key (16, 24, or 32 chars)">
+      <button id="aesEncryptBtn">Encrypt</button>
+      <textarea id="aesCiphertext" readonly placeholder="Encrypted text"></textarea>
+
+      <h3>Decrypt</h3>
+      <textarea id="aesDecryptCiphertext" placeholder="Enter ciphertext to decrypt"></textarea>
+      <input type="text" id="aesDecryptKey" placeholder="Enter AES key">
+      <button id="aesDecryptBtn">Decrypt</button>
+      <textarea id="aesDecryptedText" readonly placeholder="Decrypted text"></textarea>
+    </div>
+
+    <!-- DES -->
+    <div class="tool-box">
+      <h2>DES Encryption / Decryption</h2>
+      <textarea id="desPlaintext" placeholder="Enter text to encrypt"></textarea>
+      <input type="text" id="desKey" placeholder="Enter DES key (8 characters)">
+      <button id="desEncryptBtn">Encrypt</button>
+      <textarea id="desCiphertext" readonly placeholder="Encrypted text"></textarea>
+
+      <textarea id="desDecryptCiphertext" placeholder="Enter ciphertext to decrypt"></textarea>
+      <input type="text" id="desDecryptKey" placeholder="Enter DES key (8 characters)">
+      <button id="desDecryptBtn">Decrypt</button>
+      <textarea id="desDecryptedText" readonly placeholder="Decrypted text"></textarea>
+    </div>
+
+    <!-- Phishing -->
+    <div class="tool-box">
+      <h2>Phishing Link Checker</h2>
+      <form id="phishingForm" onsubmit="event.preventDefault(); scanURL();">
+        <input type="text" id="urlInput" placeholder="Enter URL to check" required>
+        <button type="submit">Scan URL</button>
+      </form>
+      <div id="result" class="output"></div>
+    </div>
+  </div>
+
+  <footer>© 2025 Cybersecurity Toolkit | Developed by Mohan Kumar Jena</footer>
+
+  <!-- JS Files -->
+  <script src="stegano.js"></script>
+  <script src="caesarCipher.js"></script>
+  <script src="AES.js"></script>
+  <script src="DES.js"></script>
+  <script src="phishing.js"></script>
+</body>
+</html>

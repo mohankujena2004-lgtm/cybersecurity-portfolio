@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | Mohan's Cybersecurity Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16a085);
+      font-family: "Poppins", sans-serif;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: hidden; z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: rgba(0, 229, 255, 0.5);
+      border-radius: 50%;
+      animation: float 15s infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+    }
+
+    .register-container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1s ease;
+      margin: 60px 0;
+    }
+
+    .register-container h2 {
+      color: #00e5ff;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .form-group i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #00bcd4;
+      font-size: 1.1rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 14px 14px 45px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 188, 212, 0.3);
+      font-size: 1rem;
+      outline: none;
+      background: rgba(255, 255, 255, 0.9);
+      color: #000;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #00bcd4;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+      background: #fff;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #00bcd4, #00e5ff);
+      color: #000;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      text-transform: uppercase;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(0, 255, 255, 0.5);
+    }
+
+    .links {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    .links a {
+      color: #00e5ff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .links a:hover {
+      color: #4dd0e1;
+      text-decoration: underline;
+    }
+
+    /* ✅ Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: -400px;
+      min-width: 280px;
+      background: #1a1a1a;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.5s ease;
+      opacity: 0;
+      z-index: 1000;
+    }
+
+    .toast.show { right: 30px; opacity: 1; }
+
+    .toast.success {
+      background: linear-gradient(135deg, #00c853, #00e676);
+      animation: successPulse 1s ease-in-out infinite alternate;
+    }
+
+    .toast.error { background: #d32f2f; }
+    .toast i { font-size: 1.2rem; }
+
+    @keyframes successPulse {
+      from { box-shadow: 0 0 10px #00e676; }
+      to { box-shadow: 0 0 25px #00ff99; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .register-container { padding: 30px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="particles" class="particles"></div>
+
+  <div class="register-container">
+    <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+    <form id="registerForm">
+      <div class="form-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="email" placeholder="Email Address" required>
+      </div>
+      <div class="form-group">
+        <i class="fas fa-phone"></i>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+      </div>
+      <div class="form-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="password" placeholder="Password" required minlength="6">
+      </div>
+      <button type="submit" class="btn">
+        <i class="fas fa-user-plus"></i> Register
+      </button>
+    </form>
+    <div class="links">
+      <p>Already have an account? <a id="loginLink">Login here</a></p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"><i class="fas"></i><span id="toast-msg"></span></div>
+
+  <script>
+    // 🟢 Floating Particles Background
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 50; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDelay = Math.random() * 15 + 's';
+      p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+      particlesContainer.appendChild(p);
+    }
+
+    // 🟢 Toast Popup
+    function showToast(type, message) {
+      const toast = document.getElementById('toast');
+      const icon = toast.querySelector('i');
+      const msg = document.getElementById('toast-msg');
+      msg.textContent = message;
+      toast.className = 'toast ' + type + ' show';
+      icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-triangle';
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    // 🟢 Register Handler
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!email || !phone || !password) {
+        showToast('error', 'All fields are required!');
+        return;
+      }
+      if (password.length < 6) {
+        showToast('error', 'Password must be at least 6 characters!');
+        return;
+      }
+
+      const hashedPassword = CryptoJS.SHA256(password).toString();
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, phone, password: hashedPassword })
+        });
+
+        let data;
+        try {
+          data = await response.json();
+        } catch {
+          showToast('error', 'Invalid response from server.');
+          return;
+        }
+
+        if (!response.ok) {
+          showToast('error', data.message || 'Error registering user.');
+          return;
+        }
+
+        // ✅ Success Popup + Redirect
+        showToast('success', '🎉 You have been registered successfully! Redirecting to login...');
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 3000);
+
+      } catch (err) {
+        showToast('error', 'Could not reach the server. Is Flask running?');
+      }
+    });
+
+    // 🟢 Login Redirect
+    document.getElementById('loginLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
